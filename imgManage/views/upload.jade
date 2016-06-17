@@ -1,0 +1,10 @@
+extends layout
+
+block linkStylesheet
+  link(rel="stylesheet", href="/stylesheets/upload.css")
+
+block content
+  h1.uplod-h1 #{title}
+  form(method="post", action="/upload/img", enctype="multipart/form-data")
+    input.upload-file(type="file", name="img")
+    input.upload-btn(type="submit", value="提交")

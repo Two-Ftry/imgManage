@@ -1,0 +1,9 @@
+.right-fixed{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  min-height: 500px;
+  background-color: green;
+}
