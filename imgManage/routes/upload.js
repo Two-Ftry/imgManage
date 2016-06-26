@@ -5,6 +5,9 @@
 */
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
+var logger = require('morgan');
+var Q = require('q');
 
 var ImgService = require('../mvc/img/service/ImgService');
 var imgService = new ImgService();
@@ -29,24 +32,62 @@ router.post('/img', function(req, res, next){
   }, function(){
     res.send('上传失败!!!');
   });
-
-
-
-  // var _destFilename = prePath + file.originalname;
-  // console.log('dest %s, __dirname: %s', _destFilename, __dirname);
-  // fs.readFile(file.path, function(err, data){
-  //   fs.writeFile(_destFilename, data, function(err){
-  //     if(err){
-  //       console.log(err);
-  //       res.send('上传失败!!!');
-  //     }else{
-  //       res.send('上传图片成功');
-  //     }
-  //   });
-  // });
 });
 
 
+router.get('/getImgList', function(req, res){
 
+  imgService.getImgList('')
+  .then(function(imgList){
+    for(var i in imgList){
+      var img = imgList[i];
+      console.log(i + ':' + img.originalname + '-' + img.filename + '\n');
+    }
+    res.send('查询成功^_^');
+  }, function(){
+      res.send('查询失败!!!');
+  });
+
+});
+
+var url = require('url');
+/**
+* @desc 根据图片名称获取图片
+*
+*/
+router.get('/getImgByFilename', function(req, res){
+  var urlParam = url.parse(req.url, true).query;
+  var filename = urlParam.filename;
+  if(!filename){
+    console.log('filename is empty!!!');
+    res.send('filename is empty!!!');
+    return;
+  }
+  var path = '../upload/img/' + filename;
+  _readFile(path)
+  .then(function(data){
+    res.writeHead(200, {'Content-Type':'image/png'});
+    // res.send(data);
+    res.end(data);
+  }, function(err){
+    console.log(err);
+    res.send('error');
+  });
+
+});
+
+
+function _readFile(path){
+  var deferred = Q.defer();
+  fs.readFile(path, function(err, data){
+    if(err){
+      console.log('fs.readFile error', err);
+      deferred.reject(err);
+    }else{
+      deferred.resolve(data);
+    }
+  });
+  return deferred.promise;
+}
 
 module.exports = router;

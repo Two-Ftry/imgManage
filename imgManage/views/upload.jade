@@ -8,3 +8,7 @@ block content
   form(method="post", action="/upload/img", enctype="multipart/form-data")
     input.upload-file(type="file", name="img")
     input.upload-btn(type="submit", value="提交")
+  a(href="/upload/getImgList") 图片列表
+
+block scripts
+  script(src="/jquery/dist/jquery.min.js")

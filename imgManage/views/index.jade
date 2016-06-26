@@ -1,6 +1,18 @@
 extends layout
 
+block linkStylesheet
+  link(rel="stylesheet", href="/stylesheets/index.css")
+
 block content
   h1= title
   p Welcome to #{title}
   a(href="/upload") 上传图片
+  div
+    a(href="/upload/getImgList") 图片列表
+  div.img-box
+    each item in imgList
+      img(data-src="#{item.filename}")
+
+block scripts
+  script(src="/jquery/dist/jquery.min.js")
+  script(src="/javascripts/index.client.js")

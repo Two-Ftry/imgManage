@@ -12,7 +12,7 @@ var upload = require('./routes/upload');
 var app = express();
 
 var multer = require('multer');
-app.use(multer({dest: '/temp'}).array('img'));
+app.use(multer({dest: '../upload/temp'}).array('img'));
 
 
 // view engine setup
@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'bower_components')));
 
 app.use('/', routes);
 app.use('/users', users);

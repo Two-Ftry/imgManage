@@ -1,0 +1,27 @@
+{
+  "name": "imgManage",
+  "description": "img manage bower",
+  "main": "",
+  "authors": [
+    "jianfeng_huang"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "img"
+  ],
+  "homepage": "https://github.com/Two-Ftry/imgManage",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
