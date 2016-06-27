@@ -1,9 +1,58 @@
-.img-box{
-  width: 100%;
+.index-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   padding-right: 200px;
+  line-height: 60px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
 }
-.img-box img{
+.index-header h1{
+  float: left;
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.index-header .index-manage{
+  float:right;
+  margin-right: 20px;
+}
+.img-outer-box{
+  padding-top: 60px;
+  margin-right: 200px;
+  overflow-y: auto;
+}
+.img-outer-box img{
   width: 200px;
   height: 200px;
   margin: 20px 0 0 20px;
+}
+.search-box{
+  float: left;
+}
+.search-box .search-text{
+  width: 540px;
+  margin-left: 20px;
+  padding: 0 6px;
+  border: 1px solid #ccc;
+  line-height: 28px;
+}
+.search-box .search-btn{
+  padding: 0 15px;
+  height: 28px;
+  margin-left: 20px;
+  line-height: 28px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.search-box .search-btn:hover{
+  background-color: #999;
+}
+.page-box{
+  margin-top: 40px;
+}
+.page-box a{
+  float: right;
+  margin-left: 20px;
 }

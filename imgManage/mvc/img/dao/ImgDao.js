@@ -61,10 +61,21 @@ ImgDao.prototype.save = function(img){
 * @desc 查询图片列表
 * @param Object option 筛选条件
 */
-ImgDao.prototype.getImgList = function(option){
+ImgDao.prototype.getImgList = function(query){
   var deferred = Q.defer();
-  ImgModel.find(option, function(err, imgs){
+  var _query = {
+  }
+
+  if(query.keyword){
+    var keywordStr = '/' + query.keyword + '/i';
+    _query = {
+        originalname: eval(keywordStr),
+        filename: eval(keywordStr)
+    };
+  }
+  ImgModel.find(_query, null, {skip: query.start, limit: query.limit}, function(err, imgs){
     if(err){
+      console.log('dao getImgList', err);
       deferred.reject(err);
     }else{
       deferred.resolve(imgs);

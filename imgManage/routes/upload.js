@@ -8,6 +8,7 @@ var router = express.Router();
 var fs = require('fs');
 var logger = require('morgan');
 var Q = require('q');
+var bodyParser = require('body-parser');
 
 var ImgService = require('../mvc/img/service/ImgService');
 var imgService = new ImgService();
@@ -34,18 +35,27 @@ router.post('/img', function(req, res, next){
   });
 });
 
-
-router.get('/getImgList', function(req, res){
-
-  imgService.getImgList('')
+var urlencodedParser = bodyParser.urlencoded({extended: false});
+router.post('/getImgList', urlencodedParser, function(req, res){
+  // var query = {
+  //   param: req.body.param,
+  //   start: req.body.start,
+  //   limit: req.body.limit
+  // }
+  // console.log('req', req.body.param);
+  var query = req.body;
+  // console.log('query %s - %s - %s', query.keyword, query.start, query.limit);
+  imgService.getImgList(query)
   .then(function(imgList){
-    for(var i in imgList){
-      var img = imgList[i];
-      console.log(i + ':' + img.originalname + '-' + img.filename + '\n');
-    }
-    res.send('查询成功^_^');
+    res.send({
+      success: true,
+      imgList: imgList
+    });
   }, function(){
-      res.send('查询失败!!!');
+      res.send({
+        success: false,
+        errorMsg: '查询失败!!!'
+      });
   });
 
 });

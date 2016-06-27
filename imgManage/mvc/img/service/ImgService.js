@@ -50,7 +50,7 @@ ImgService.prototype.promiseUpload = function(file){
   var filename =_generateFilename(),
       imgType = this.getImgType(file.originalname);
   var _destFilename = _prePath + filename + '.' + imgType;
-  console.log('filename %s', filename + '.' + this.getImgType(file.originalname));
+  // console.log('filename %s', filename + '.' + this.getImgType(file.originalname));
   debugger;
   fs.readFile(file.path, function(err, data){
     fs.writeFile(_destFilename, data, function(err){
@@ -81,9 +81,22 @@ ImgService.prototype.promiseUpload = function(file){
 * @desc 获取图片列表
 * @param Object option 筛选条件
 */
-ImgService.prototype.getImgList = function(option){
+ImgService.prototype.getImgList = function(query){
   var deferred = Q.defer();
-  imgDao.getImgList()
+
+    try{
+      query.start = parseInt(query.start);
+    } catch(e){
+      query.start = 0;
+    }
+
+    try{
+      query.limit = parseInt(query.limit);
+    } catch(e){
+      query.limit = 20;
+    }
+
+  imgDao.getImgList(query)
   .then(function(imgList){
     deferred.resolve(imgList);
   }, function(err){

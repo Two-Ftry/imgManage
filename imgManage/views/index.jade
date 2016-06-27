@@ -4,14 +4,20 @@ block linkStylesheet
   link(rel="stylesheet", href="/stylesheets/index.css")
 
 block content
-  h1= title
-  p Welcome to #{title}
-  a(href="/upload") 上传图片
-  div
-    a(href="/upload/getImgList") 图片列表
-  div.img-box
-    each item in imgList
-      img(data-src="#{item.filename}")
+  div.index-header.clearfix
+    h1= title
+    div.search-box
+      input.search-text(type="text", name="param", placeholder="请输入关键字")
+      input.search-btn.ev-search-btn(type="button", value="搜索")
+    a.index-manage(href="/upload") 管理
+  div.img-outer-box.ev-img-outer-box
+    div.img-box.ev-img-box
+    //-
+      div.page-box.clearfix
+        a.page-last(href="javascript:void(0);") 尾页
+        a.page-next(href="javascript:void(0);") 下一页
+        a.page-prev(href="javascript:void(0);") 上一页
+        a.page-first(href="javascript:void(0);") 首页
 
 block scripts
   script(src="/jquery/dist/jquery.min.js")
