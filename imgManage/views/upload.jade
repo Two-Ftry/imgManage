@@ -9,10 +9,14 @@ block content
     input.upload-file(type="file", name="img")
     input.upload-btn(type="submit", value="提交")
   //-a(href="/upload/getImgList") 图片列表
-  div.img-table
-    table
+  div.img-table-box
+    div.search-box
+      input.search-text(type="text", name="keyword", value="", placeholder="请输入关键字")
+      input.search-btn.ev-search-btn(type="button", value="搜索")
+    table.img-table
       thead
         tr
+          th 序号
           th 图片名称
           th 缩略图
           th 类型
@@ -20,6 +24,12 @@ block content
           th 创建时间
           th 操作
       tbody
+    div.img-page
+      span.page-show
+      a.ev-page-first(src="javascript:void(0);") 首页
+      a.ev-page-prev(src="javascript:void(0);") 上一页
+      a.ev-page-next(src="javascript:void(0);") 下一页
+      a.ev-page-last(src="javascript:void(0);") 尾页
 
 
 block scripts

@@ -15,12 +15,46 @@
 .upload-btn:hover{
   background-color: #bbb;
 }
-.img-table{
+.img-table-box{
   margin-top: 20px;
   padding-left: 20px;
 }
-.img-table table tr th, .img-table table tr td{
+.img-table tr th, .img-table tr td{
   border: 1px solid #ccc;
   min-width: 120px;
   line-height: 30px;
+}
+.img-thumbnail{
+  width: 40px;
+}
+.img-page{
+  padding: 20px 0;
+}
+.img-page a{
+  margin-left: 20px;
+  cursor: pointer;
+}
+.img-page a.unactive{
+  color: #ccc;
+}
+.search-box{
+  padding: 20px 0;
+}
+.search-text{
+  width: 300px;
+  padding: 0 5px;
+  border: 1px solid #ccc;
+  line-height: 28px;
+  border-radius: 2px;
+}
+.search-btn{
+  margin-left: 20px;
+  padding: 0 20px;
+  line-height: 28px;
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  cursor: pointer;
+}
+.search-btn:hover{
+  background-color: #999;
 }

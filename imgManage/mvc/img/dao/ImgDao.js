@@ -13,27 +13,6 @@ db.on('error', console.error.bind(console, '连接数据库报错!!!'));
 
 db.on('open', function(){
   console.log('打开数据库连接!!!');
-
-  // var PersonSchema = new Schema({
-  //   name: String
-  // });
-  // PersonSchema.methods.speak = function(){
-  //   console.log('my name is' + this.name);
-  // }
-  //
-  // var PersonModel = db.model('Person', PersonSchema);
-  // var personEntity = new PersonModel({name:'黄剑枫'});
-  // console.log(personEntity.name);
-  // personEntity.speak();
-  // personEntity.save();
-  //
-  // //
-  // PersonModel.find(function(err, persons){
-  //   for(var i in persons){
-  //     var p = persons[i];
-  //     console.log(i + ':' + p.name + '\n');
-  //   }
-  // });
 });
 
 var ImgSchema = new Schema({
@@ -93,5 +72,56 @@ ImgDao.prototype.getImgList = function(query){
   });
   return deferred.promise;
 };
+
+//根据id获取图片信息
+ImgDao.prototype.getImgById = function(id){
+  var deferred = Q.defer();
+
+  if(!id){
+    deferred.reject({
+      success: false,
+      errorMsg: 'id不能为空'
+    });
+    return;
+  }
+  console.log('dao id: %s', id );
+  ImgModel.findById(id, function(err, imgItem){
+    if(err){
+      console.log('find img by Id:', err);
+      deferred.reject(err);
+    }else{
+      deferred.resolve(imgItem);
+    }
+  });
+
+  return deferred.promise;
+}
+
+//根据id删除图片
+ImgDao.prototype.delImgById = function(id){
+  var deferred = Q.defer();
+
+  if(!id){
+    deferred.reject({
+      success: false,
+      errorMsg: 'id不能为空'
+    });
+    return;
+  }
+
+  ImgModel.findByIdAndRemove(id, function(err){
+    if(err){
+      console.log('del img by Id:', err);
+      deferred.reject(err);
+    }else{
+      console.log('dao 删除功能!!');
+      deferred.resolve({
+        success: true
+      });
+    }
+  });
+
+  return deferred.promise;
+}
 
 module.exports = ImgDao;

@@ -123,4 +123,72 @@ function _generateFilename(){
   return uuid.v4();
 }
 
+/**
+* @desc 删除图片
+*/
+ImgService.prototype.imgDel = function(imgId){
+  var deferred = Q.defer();
+
+  if(!imgId){
+    deferred.reject({
+      success: false,
+      errorMsg: 'id不能为空'
+    });
+    return;
+  }
+
+  var img = null;
+  //查询
+  imgDao.getImgById(imgId)
+  .then(function(data){
+    img = data;
+    //删除数据记录
+    imgDao.delImgById(imgId)
+    .then(function(){
+      //从磁盘删除图片
+      __removeFile(_prePath + data.filename)
+      .then(function(){
+        deferred.resolve({
+          success: true
+        });
+      }, function(){
+        deferred.reject({
+          success: false,
+          errorMsg: '删除图片失败'
+        });
+      });
+    }, function(err){
+      deferred.reject({
+        sucess: false,
+        error: err,
+        errorMsg: err.errorMsg
+      });
+    });
+
+  }, function(err){
+    deferred.reject({
+      sucess: false,
+      error: err,
+      errorMsg: err.errorMsg
+    });
+  });
+
+  return deferred.promise;
+};
+
+function __removeFile(path){
+  var deferred = Q.defer();
+  fs.unlink(path, function(err){
+    if(err){
+      deferred.reject(err);
+    }else{
+      deferred.resolve({
+        success: true,
+        errorMsg: ''
+      });
+    }
+  });
+  return deferred.promise;
+}
+
 module.exports = ImgService;

@@ -1,0 +1,15 @@
+extends layout
+
+block linkStylesheet
+  link(rel="stylesheet", href="/stylesheets/edit.css")
+
+block content
+  h1.uplod-h1 #{title}
+  div.eidt-box
+    input.img-name(type="text", name="imgName", value="")
+    input.ev-edit-submit(type="button", value="提交")
+
+
+block scripts
+  script(src="/jquery/dist/jquery.min.js")
+  script(src="/javascripts/edit.client.js")

@@ -107,8 +107,17 @@ PageTable.prototype = {
   isFull: function(){
     return this.page.pageIndex >= this.page.totalPage-1 ? true : false;
   },
+  isLastPage: function(){
+    return this.isFull();
+  },
   isFirstPage: function(){
     return this.page.pageIndex == 0 ? true : false;
+  },
+  getCurrentPage: function(){
+    return this.page.pageIndex;
+  },
+  getTotalPage: function(){
+    return this.page.totalPage;
   }
 }
 

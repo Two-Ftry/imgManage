@@ -101,4 +101,33 @@ function _readFile(path){
   return deferred.promise;
 }
 
+//删除图片
+router.post('/imgDel', urlencodedParser, function(req, res){
+  var imgId = req.body.imgId;
+  console.log('router id %s', imgId);
+  console.log('body: ', req.body);
+  if(!imgId || imgId == 'undefined'){
+    res.send({
+      success: false,
+      errorMsg: 'id不能为空'
+    })
+    return;
+  }
+  imgService.imgDel(imgId)
+  .then(function(data){
+    //
+    res.send({
+      success: true,
+      errorMsg: ''
+    });
+  }, function(err){
+    //
+    res.send({
+      success: false,
+      error: err,
+      errorMsg: err.errorMsg
+    });
+  });
+});
+
 module.exports = router;
