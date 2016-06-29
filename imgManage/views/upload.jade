@@ -8,7 +8,21 @@ block content
   form(method="post", action="/upload/img", enctype="multipart/form-data")
     input.upload-file(type="file", name="img")
     input.upload-btn(type="submit", value="提交")
-  a(href="/upload/getImgList") 图片列表
+  //-a(href="/upload/getImgList") 图片列表
+  div.img-table
+    table
+      thead
+        tr
+          th 图片名称
+          th 缩略图
+          th 类型
+          th 大小
+          th 创建时间
+          th 操作
+      tbody
+
 
 block scripts
   script(src="/jquery/dist/jquery.min.js")
+  script(src="/javascripts/pageTable.client.js")
+  script(src="/javascripts/imgList.client.js")

@@ -16,7 +16,7 @@ var imgService = new ImgService();
 var fs = require('fs');
 
 router.get('/', function(req, res, next){
-  res.render('upload', {title: '上传图片'});
+  res.render('upload', {title: '图片后台管理'});
 });
 
 
@@ -46,10 +46,11 @@ router.post('/getImgList', urlencodedParser, function(req, res){
   var query = req.body;
   // console.log('query %s - %s - %s', query.keyword, query.start, query.limit);
   imgService.getImgList(query)
-  .then(function(imgList){
+  .then(function(countAndImgList){
     res.send({
       success: true,
-      imgList: imgList
+      count: countAndImgList.count,
+      imgList: countAndImgList.imgList
     });
   }, function(){
       res.send({

@@ -97,8 +97,8 @@ ImgService.prototype.getImgList = function(query){
     }
 
   imgDao.getImgList(query)
-  .then(function(imgList){
-    deferred.resolve(imgList);
+  .then(function(countAndImgList){
+    deferred.resolve(countAndImgList);
   }, function(err){
     deferred.reject(err);
   });

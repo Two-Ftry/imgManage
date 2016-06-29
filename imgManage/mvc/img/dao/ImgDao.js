@@ -78,7 +78,17 @@ ImgDao.prototype.getImgList = function(query){
       console.log('dao getImgList', err);
       deferred.reject(err);
     }else{
-      deferred.resolve(imgs);
+      ImgModel.count(_query, function(err, count){
+        if(err){
+          console.log('dao getImgList count', err);
+          deferred.reject(err);
+        }else{
+          deferred.resolve({
+            count: count,
+            imgList: imgs
+          });
+        }
+      });
     }
   });
   return deferred.promise;
