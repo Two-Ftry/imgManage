@@ -5,8 +5,8 @@ block linkStylesheet
 
 block content
   h1.uplod-h1 #{title}
-  div.eidt-box
-    input.img-name(type="text", name="imgName", value="")
+  div.edit-box.ev-edit-box(data-id="#{imgId}")
+    input.img-name.ev-img-name(type="text", name="imgName", value="")
     input.ev-edit-submit(type="button", value="提交")
 
 

@@ -191,4 +191,61 @@ function __removeFile(path){
   return deferred.promise;
 }
 
+
+/**
+* @desc 修改图片信息
+*/
+ImgService.prototype.editImg = function(img){
+  var deferred = Q.defer();
+  if(!img || !img.id){
+    setTimeout(function(){
+      deferred.reject({
+        success: false,
+        errorMsg: '图片id不能为空'
+      });
+    }, 200);
+  }
+
+  imgDao.editImg(img)
+  .then(function(data){
+    deferred.resolve({
+      success: true
+    });
+  }, function(err){
+      deferred.reject({
+        success: false,
+        errorMsg: err.errorMsg,
+        error: error
+      });
+  });
+
+  return deferred.promise;
+}
+
+/**
+* @desc 根据id获取图片信息
+*/
+ImgService.prototype.getImgById = function(imgId){
+  var deferred = Q.defer();
+  if(!imgId){
+    setTimeout(function(){
+      deferred.reject({
+        success: false,
+        errorMsg: '图片Id不能为空'
+      });
+    }, 200);
+  }
+
+
+  imgDao.getImgById(imgId)
+  .then(function(data){
+    deferred.resolve(data);
+  }, function(error){
+    deferred.reject({
+      error: error
+    })
+  });
+
+  return deferred.promise;
+};
 module.exports = ImgService;

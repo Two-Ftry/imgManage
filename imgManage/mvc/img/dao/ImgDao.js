@@ -124,4 +124,27 @@ ImgDao.prototype.delImgById = function(id){
   return deferred.promise;
 }
 
+/**
+* @desc 修改图片信息
+*/
+ImgDao.prototype.editImg = function(img){
+  var deferred = Q.defer();
+
+  ImgModel.findByIdAndUpdate(img.id, img, function(err, doc){
+    if(err){
+      deferred.reject({
+        success: false,
+        errorMsg: '修改数据看错误',
+        error: error
+      });
+    }else{
+      deferred.resolve({
+        success: true
+      });
+    }
+  });
+
+  return deferred.promise;
+}
+
 module.exports = ImgDao;

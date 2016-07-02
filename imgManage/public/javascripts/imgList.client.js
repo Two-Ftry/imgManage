@@ -35,7 +35,7 @@ $(function(){
                   <td>' + img.size + '</td>\
                   <td>' + new Date(img.createTime) + '</td>\
                   <td>\
-                    <a href="javascript:void(0);" class="ev-img-modify">修改</a>\
+                    <a href="/edit?imgId=' + img._id + '" class="ev-img-modify">修改</a>\
                     <a href="javascript:void(0);" class="ev-img-del">删除</a>\
                   </td>\
                 </tr>';

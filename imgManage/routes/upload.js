@@ -130,4 +130,29 @@ router.post('/imgDel', urlencodedParser, function(req, res){
   });
 });
 
+/**
+* @desc 根据图片名称获取图片
+*
+*/
+router.post('/getImgById', urlencodedParser, function(req, res){
+  var imgId = req.body.imgId;
+  console.log('111: %s', imgId);
+  imgService.getImgById(imgId)
+  .then(function(data){
+    console.log(222);
+    res.send({
+      success: true,
+      data: data
+    });
+  }, function(error){
+    console.log(333);
+    res.send({
+      success: false,
+      errorMsg: error.errorMsg,
+      error: error
+    });
+  });
+
+});
+
 module.exports = router;
